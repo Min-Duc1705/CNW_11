@@ -8,7 +8,6 @@ class CategoryModel {
         $db = new CategoriesDB(); // Tạo đối tượng UserDB
         $this->conn = $db->getConnection(); // Lấy kết nối PDO
     }
-
     // Lấy tất cả các danh mục
     public function getAllCategories() {
         $query = "SELECT * FROM categories";
@@ -21,6 +20,5 @@ class CategoryModel {
     public function getCategoryById($id) {
        
     }
-
 }
 ?>
