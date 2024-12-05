@@ -30,10 +30,11 @@
             </form>
         </nav>
 
-        <!-- Nút đăng nhập / đăng ký -->
+        <!-- Nút đăng nhập-->
         <nav class="auth-buttons">
-            <a href="../Admin/login.php" class="btn btn-success">Đăng Nhập</a>
-            <a href="../Admin/register.php" class="btn btn-outline-primary">Đăng Ký</a>
+            <form action="views/admin/login.php" method="GET">
+                    <button type="submit" class="btn btn-success">Đăng Nhập</button>
+            </form>
         </nav>
     </header>
 
