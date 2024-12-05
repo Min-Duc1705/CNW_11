@@ -47,18 +47,9 @@
                         <input type="checkbox" class="form-check-input" id="formCheck">
                         <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
                     </div>
-                    <div class="forgot">
-                        <small><a href="#">Forgot Password?</a></small>
-                    </div>
                 </div>
                 <div class="input-group mb-3">
                     <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
-                </div>
-                <div class="input-group mb-3">
-                    <button class="btn btn-lg btn-light w-100 fs-6"><img src="../../public/images/google.png" style="width:20px" class="me-2"><small>Sign In with Google</small></button>
-                </div>
-                <div class="row">
-                    <small>Don't have account? <a href="#">Sign Up</a></small>
                 </div>
           </div>
        </div> 
