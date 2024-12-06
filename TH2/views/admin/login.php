@@ -1,3 +1,15 @@
+<?php
+require_once __DIR__ . '/../../models/UserModel.php';
+
+
+// Nhận dữ liệu từ form
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
+
+// Khởi tạo model và xử lý đăng nhập
+$userModel = new UserModel();
+$userModel->loginAndRedirect($username, $password);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
