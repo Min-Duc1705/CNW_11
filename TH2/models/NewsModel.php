@@ -3,7 +3,7 @@ require_once __DIR__ . '/../Config/Database.php';
 
 class NewsModel {
     private $conn;
-
+  
 
     // Hoàng Văn Điệp làm
     // Constructor để kết nối cơ sở dữ liệu
@@ -19,11 +19,24 @@ class NewsModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    public function getNewsId($id) {
+        $stmt = $this->conn->prepare("SELECT * FROM news WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về bài viết
+    }
     
     // Tìm Kiếm
-    public function TimKiem($id) {
-      //tim kiem cho nay
+    public function getSreach($word) {
+        $sql = "SELECT * FROM news WHERE title LIKE :word";
+        $stmt = $this->conn->prepare($sql);
+        $searchTerm = "%$word%"; // Thêm dấu phần trăm để sử dụng với LIKE
+        $stmt->bindParam(':word', $searchTerm, PDO::PARAM_STR); // Dùng tham số an toàn
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
     }
+    
 
 
 
