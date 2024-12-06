@@ -9,7 +9,6 @@ class Database {
     public function __construct() {
         $this -> connect();
     }
-    // Kết nối đến cơ sở dữ liệu
     public function connect() {
         try {
             $this->conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->username, $this->password);
