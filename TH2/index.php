@@ -1,5 +1,6 @@
 <?php
 
+
 require './Controllers/BaseController.php';
 $controllerName = ucfirst((strtolower($_REQUEST['controller'])?? 'Home') . 'Controller') ;
  
@@ -9,3 +10,9 @@ require "./Controllers/${controllerName}.php";
 $controllerOpject = new $controllerName;
 
 $controllerOpject -> $actionName();
+
+echo $_SERVER['REQUEST_URI'];
+include "../TH2/Views/Home/index.php";
+exit;
+?>
+
