@@ -60,12 +60,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="password" name="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" required>   
                             <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 mt-3">Login</button>
                     </form>
-</div>
-<div class="input-group mb-5 d-flex justify-content-between">
+                </div>
+                <div class="input-group mb-5 d-flex justify-content-between">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="formCheck">
                         <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
                     </div>
+                    
+                    <div class="input-group mr-3">
+                        <form method="POST" action="/CNW_11/TH2/views/home/index.php">
+                            <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 mt-3">Comeback if you are not admin</button>
+                        </form>
+                    </div>
+
                 </div>
           </div>
        </div> 
@@ -75,6 +82,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
-<?php if (isset($_GET['error']) && $_GET['error'] == 'invalid_credentials'): ?>
-    <div class="alert alert-danger mt-2">Invalid username or password!</div>
-<?php endif; ?>
+
