@@ -1,3 +1,4 @@
+<!-- Lê Minh Đức -->
 <?php
 class Database {
     private $host = "localhost";
