@@ -1,3 +1,39 @@
+<?php
+require_once "../../../config/Database.php";
+require_once "../../../controllers/NewsController.php";
+
+$db = new Database();
+$conn = $db->connect();
+$controller = new NewsController($conn);
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["action"]) && $_POST["action"] === "add") {
+        $imagePath = null;
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = '../../public/images/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+            $filename = basename($_FILES['image']['name']);
+            $imagePath = $uploadDir . $filename;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+                $imagePath = str_replace('../../../', '', $imagePath); // Lưu đường dẫn tương đối
+            } else {
+                $imagePath = null; // Nếu upload thất bại
+            }
+        }
+
+        // Gọi hàm thêm mới
+        $controller->createNews($_POST["title"], $_POST["content"], $imagePath, $_POST["category_id"]);
+        
+        // Chuyển hướng về dashboard
+        header("Location: ../../Admin/dashboard.php");
+        exit();
+    }
+}
+?>
+
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <form method="POST" action="" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
 
