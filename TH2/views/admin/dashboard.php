@@ -1,5 +1,30 @@
-<!-- Đào Minh Đức -->
+<!-- Lê Minh Đức -->
+<?php
+require_once "../../Config/Database.php";
+require_once "../../Controllers/NewsController.php";
 
+$db = new Database();
+$conn = $db->connect();
+$controller = new NewsController($conn);
+
+// Xử lý hành động
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["action"])) {
+        $action = $_POST["action"];
+        if ($action === "add") {
+            $controller->createNews($_POST["title"], $_POST["content"], $_POST["image"], $_POST["category_id"]);
+        } elseif ($action === "edit") {
+            $controller->editNews($_POST["id"], $_POST["title"], $_POST["content"], $_POST["image"], $_POST["category_id"]);
+        } elseif ($action === "delete") {
+            $controller->removeNews($_POST["id"]);
+        }
+    }
+}
+
+$newsList = $controller->listNews();
+?>
+
+<!-- Đào Minh Đức -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
