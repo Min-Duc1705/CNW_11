@@ -1,5 +1,6 @@
 <?php
 
+
 require './Controllers/BaseController.php';
 
 // Lấy giá trị controller và action từ query string hoặc đặt mặc định
@@ -19,5 +20,6 @@ if (!method_exists($controllerObject, $actionName)) {
     die("Action $actionName không tồn tại trong controller $controllerName.");
 }
 $controllerObject->$actionName();
+
 
 
