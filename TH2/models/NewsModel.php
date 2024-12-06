@@ -51,7 +51,14 @@ class NewsModel {
         return $stmt->execute([$id]);
     }
 
-
+    // Phương thức getNewsById để lấy tin tức theo ID
+    public function getNewsById($id) {
+        $stmt = $this->conn->prepare("SELECT news.*, categories.name AS category_name FROM news 
+                                      LEFT JOIN categories ON news.category_id = categories.id 
+                                      WHERE news.id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     // Đóng kết nối
     public function closeConnection() {
         $this->conn = null; // Đặt kết nối về null để giải phóng tài nguyên
