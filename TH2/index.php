@@ -1,14 +1,26 @@
 <?php
 
+
+
 require './Controllers/BaseController.php';
-$controllerName = ucfirst((strtolower($_REQUEST['controller'])?? 'Home') . 'Controller') ;
- 
-$actionName = $_REQUEST['action']?? 'index';
-require "./Controllers/${controllerName}.php";
 
-$controllerOpject = new $controllerName;
+// Lấy giá trị controller và action từ query string hoặc đặt mặc định
+$controllerName = ucfirst((strtolower($_REQUEST['controller'] ?? 'home'))) . 'Controller';
+$actionName = $_REQUEST['action'] ?? 'index';
 
-$controllerOpject -> $actionName();
+// Tải tệp controller
+$controllerPath = "./Controllers/${controllerName}.php";
+if (!file_exists($controllerPath)) {
+    die("Controller file $controllerPath không tồn tại.");
+}
+require $controllerPath;
+
+// Khởi tạo controller và gọi action
+$controllerObject = new $controllerName;
+if (!method_exists($controllerObject, $actionName)) {
+    die("Action $actionName không tồn tại trong controller $controllerName.");
+}
+$controllerObject->$actionName();
 
 
 ?>

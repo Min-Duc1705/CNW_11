@@ -39,18 +39,25 @@
     </header>
 
     <div class="container-fluid bg-primary py-2">
-        <ul class="nav justify-content-evenly list-unstyled d-flex">
-            <li class="nav-item"><a href="#" class="nav-link text-white"><i class="fa-solid fa-house"></i></a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Thời sự</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Khoa Học</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Thế Giới</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Thể Thao</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Giải Trí</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Pháp Luật</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Giáo Dục</a></li>
-       
-        </ul>
-    </div>
+    <ul class="nav justify-content-evenly list-unstyled d-flex align-items-center">
+        <!-- Icon Home -->
+        <li class="nav-item">
+            <a href="#" class="nav-link text-white"><i class="fa-solid fa-house"></i></a>
+        </li>
+
+        <!-- Categories -->
+        <?php if (!empty($categories)): ?>
+            <?php foreach ($categories as $category): ?>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white"><?php echo $category['name']; ?></a>
+                </li>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <li class="nav-item text-white">Không có danh mục nào</li>
+        <?php endif; ?>
+    </ul>
+</div>
+
 
     <div class="container my-4">
         <div class="row">
@@ -97,23 +104,33 @@
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="mb-4">
-                    <div class="section-title mb-4">
-                        <span class="text-primary">Latest Updates</span>
-                    </div>
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                <div class="section-title mb-4">
+                    <span class="text-primary">Latest Updates</span>
+                </div>
+                <div class="row">
+                    <?php foreach ($news as $item): ?>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card h-100">
+                                <!-- Hiển thị ảnh -->
+                                <img src="../../public/images/<?php echo $item['image']; ?>" 
+                                     class="card-img-top" 
+                                     alt="<?php echo $item['title']; ?>">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title"><?php echo $item['title']; ?></h5>
+                                    <p class="card-text"><?php echo $item['content']; ?></p>
+                                    <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </body>
 </html>
