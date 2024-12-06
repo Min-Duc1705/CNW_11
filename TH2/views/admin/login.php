@@ -66,12 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="checkbox" class="form-check-input" id="formCheck">
                         <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
                     </div>
-                    
-                    <div class="input-group mr-3">
-                        <form method="POST" action="/CNW_11/TH2/views/home/index.php">
-                            <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 mt-3">Comeback if you are not admin</button>
-                        </form>
-                    </div>
+                     
 
                 </div>
           </div>
