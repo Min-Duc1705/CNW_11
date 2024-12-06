@@ -41,6 +41,15 @@ class NewsModel {
         return $stmt->execute([$title, $content, $image, $category_id]);
     }
 
+    public function updateNews($id, $title, $content, $image, $category_id) {
+        $stmt = $this->conn->prepare("UPDATE news SET title = ?, content = ?, image = ?, category_id = ? WHERE id = ?");
+        return $stmt->execute([$title, $content, $image, $category_id, $id]);
+    }
+
+    public function deleteNews($id) {
+        $stmt = $this->conn->prepare("DELETE FROM news WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
 
 
     // Đóng kết nối
