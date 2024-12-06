@@ -102,25 +102,14 @@
         <!-- Nút quay lại -->
         <a href="index.php?page=home" class="back-btn">Quay lại</a>
 
-        <!-- Tiêu đề tin tức -->
         <h1><?php echo htmlspecialchars($newsDetail['title']); ?></h1>
+        <img src="/CNW_11/TH2/public/images/<?php echo htmlspecialchars($newsDetail['image']); ?>" alt="News Image">
+        <p><?php echo nl2br(htmlspecialchars($newsDetail['content'])); ?></p>
 
-        <!-- Chuyên mục -->
-        <p class="news-category">Chuyên mục: <?php echo htmlspecialchars($newsDetail['category']); ?></p>
-
-        <!-- Ảnh tin tức (nếu có) -->
-        <?php if (!empty($newsDetail['image'])): ?>
-            <img src="uploads/<?php echo htmlspecialchars($newsDetail['image']); ?>" alt="Ảnh tin tức" class="news-image">
-        <?php endif; ?>
-
-        <!-- Nội dung tin tức -->
-        <div class="news-content">
-            <?php echo nl2br(htmlspecialchars($newsDetail['content'])); ?>
-        </div>
-
-        <!-- Ngày đăng -->
+  
         <div class="news-footer">
-            <p><small>Ngày đăng: <?php echo htmlspecialchars($newsDetail['created_at']); ?></small></p>
+            
+
         </div>
     </div>
 </body>
