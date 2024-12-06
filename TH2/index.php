@@ -1,7 +1,5 @@
 <?php
 
-
-
 require './Controllers/BaseController.php';
 
 // Lấy giá trị controller và action từ query string hoặc đặt mặc định
@@ -22,6 +20,4 @@ if (!method_exists($controllerObject, $actionName)) {
 }
 $controllerObject->$actionName();
 
-
-?>
 
