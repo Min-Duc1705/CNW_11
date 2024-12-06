@@ -41,7 +41,7 @@ class UserModel {
     public function getUserById($id) {
         try {
             $sql = "SELECT id, username, email, role, created_at FROM users WHERE id = :id";
-            $stmt = $this->conn->prepare($sql);  // Sửa lỗi từ ">" thành "->"
+            $stmt = $this->conn->prepare($sql); 
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -92,6 +92,34 @@ class UserModel {
             return false; // Sai username hoặc password
         } catch (PDOException $e) {
             return false;
+        }
+    }
+
+    // Đăng nhập và xử lý chuyển hướng
+    public function loginAndRedirect($username, $password) {
+        session_start(); // Bắt đầu session
+        if (!empty($username) && !empty($password)) {
+            $user = $this->authenticateUser($username, $password);
+    
+            if ($user) {
+                // Lưu thông tin người dùng vào session
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+    
+                // Chuyển hướng đến trang dashboard
+                header("Location: dashboard.php");
+                exit();
+            } else {
+                // Sai username hoặc password
+                $_SESSION['error'] = 'Sai tên đăng nhập hoặc mật khẩu!';
+                header("Location: login.php");
+                exit();
+            }
+        } else {
+            // Không nhập đủ thông tin
+            $_SESSION['error'] = 'Vui lòng nhập đầy đủ thông tin!';
+            header("Location: login.php");
+            exit();
         }
     }
 
