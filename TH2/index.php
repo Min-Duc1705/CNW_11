@@ -9,3 +9,7 @@ require "./Controllers/${controllerName}.php";
 $controllerOpject = new $controllerName;
 
 $controllerOpject -> $actionName();
+
+
+?>
+
