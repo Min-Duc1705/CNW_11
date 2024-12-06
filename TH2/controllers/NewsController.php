@@ -1,14 +1,28 @@
 <?php
-require_once __DIR__ . "/../Models/NewsModel.php";
+require_once __DIR__ . "/../models/NewsModel.php";
 
 class NewsController {
     private $model;
 
-    // Lê Minh Đức
     public function __construct($db) {
-        $this->model = new NewsModel($db);
+        $this->model = new NewsModel($db); // Truyền kết nối CSDL vào model
     }
 
+    // Phương thức detail để hiển thị bài viết chi tiết
+    public function detail($id) {
+        $newsDetail = $this->model->getNewsId($id); // Lấy bài viết từ model
+        if ($newsDetail) {
+            require_once __DIR__ . '/../views/news/detail.php'; // Gọi view để hiển thị
+        } else {
+            echo "<p>Bài viết không tồn tại.</p>";
+        }
+    }
+
+
+
+
+
+    // Lê Minh Đức
     public function listNews() {
         return $this->model->getAllNews();
     }

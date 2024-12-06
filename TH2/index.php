@@ -1,23 +1,38 @@
 <?php
+require_once './Config/Database.php'; // Kết nối CSDL
 
-require './Controllers/BaseController.php';
+// Tạo kết nối CSDL
+$db = new Database();
+$dbConnection = $db->connect();
 
-// Lấy giá trị controller và action từ query string hoặc đặt mặc định
-$controllerName = ucfirst((strtolower($_REQUEST['controller'] ?? 'home'))) . 'Controller';
+// Lấy controller, action, và id từ query string
+$controllerName = ucfirst(strtolower($_REQUEST['controller'] ?? 'home')) . 'Controller';
 $actionName = $_REQUEST['action'] ?? 'index';
+$id = $_REQUEST['id'] ?? null;
+$search = $_REQUEST['search'] ?? null;
 
-// Tải tệp controller
+// Đường dẫn đến tệp controller
 $controllerPath = "./Controllers/${controllerName}.php";
+
+// Kiểm tra xem controller có tồn tại không
 if (!file_exists($controllerPath)) {
-    die("Controller file $controllerPath không tồn tại.");
+    die("Không tìm thấy controller $controllerName.");
 }
-require $controllerPath;
+require_once $controllerPath;
 
-// Khởi tạo controller và gọi action
-$controllerObject = new $controllerName;
-if (!method_exists($controllerObject, $actionName)) {
-    die("Action $actionName không tồn tại trong controller $controllerName.");
+// Tạo đối tượng controller
+$controllerObject = new $controllerName($dbConnection);
+
+if($search ){
+    $controllerObject->search($search);
+    exit();
 }
-$controllerObject->$actionName();
 
+// Gọi action tương ứng
+    if ($actionName == 'detail' && $id !== null) {
+        $controllerObject->$actionName($id);
+    } else {
+        $controllerObject->$actionName($id);
+    }
 
+?>

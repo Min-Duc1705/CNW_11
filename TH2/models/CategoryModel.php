@@ -25,7 +25,7 @@ class CategoryModel {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về một kết quả duy nhất
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 ?>
