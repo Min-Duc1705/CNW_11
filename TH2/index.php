@@ -1,9 +1,14 @@
 <?php
 require_once './Config/Database.php'; // Kết nối CSDL
 
+
 // Tạo kết nối CSDL
 $db = new Database();
 $dbConnection = $db->connect();
+
+
+
+
 
 // Lấy controller, action, và id từ query string
 $controllerName = ucfirst(strtolower($_REQUEST['controller'] ?? 'home')) . 'Controller';
@@ -35,4 +40,7 @@ if($search ){
         $controllerObject->$actionName($id);
     }
 
+
 ?>
+
+
