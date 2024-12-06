@@ -1,3 +1,33 @@
+
+<!-- Lê Minh Đức -->
+<?php
+require_once "../../../Config/Database.php";
+require_once "../../../Controllers/NewsController.php";
+
+$db = new Database();
+$conn = $db->connect();
+$controller = new NewsController($conn);
+
+// Kiểm tra nếu có ID từ URL
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $newsId = $_GET['id'];
+    $news = $controller->getNewsById($newsId);
+} else {
+    // Nếu không có ID, chuyển hướng về trang danh sách
+    header("Location: .../../../../Admin/dashboard.php");
+    exit();
+}
+
+// Xử lý hành động nếu có (Cập nhật tin tức)
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "edit") {
+    $controller->editNews($_POST["id"], $_POST["title"], $_POST["content"], $_POST["image"], $_POST["category_id"]);
+    header("Location: .../../../../Admin/dashboard.php");
+    exit();
+}
+?>
+
+
+<!-- Đào Minh Đức -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
