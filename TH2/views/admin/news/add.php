@@ -69,6 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button type="submit" class="btn btn-primary" name="action" value="add">Add News</button>
         
         <!-- Back Button -->
-        <a href="../../dashboard.php" class="btn btn-secondary">Back</a>
+        <a href="../../Admin/dashboard.php" class="btn btn-secondary">Back</a>
     </div>
 </form>
