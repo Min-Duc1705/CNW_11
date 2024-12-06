@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Điều kiện 1: Nếu URL không trỏ tới tệp hoặc thư mục cụ thể
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Điều kiện 2: Nếu URL không có tham số
+RewriteCond %{QUERY_STRING} ^$ 
+
+# Quy tắc: Chuyển hướng đến index.php với tham số mặc định
+RewriteRule ^$ index.php?controller=home&action=index [L]
+
+# Quy tắc chung: Chuyển mọi yêu cầu khác đến index.php (giữ nguyên tham số)
+RewriteRule ^(.*)$ index.php [QSA,L]
