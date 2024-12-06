@@ -4,7 +4,7 @@ class NewsModel {
     private $conn;
 
 
-    // Hoàng Văn Điệp
+    // Hoàng Văn Điệp làm
     // Constructor để kết nối cơ sở dữ liệu
     public function __construct() {
         $db = new Database(); // Tạo đối tượng UserDB

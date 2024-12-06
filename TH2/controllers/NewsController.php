@@ -4,6 +4,7 @@ require_once __DIR__ . "/../Models/NewsModel.php";
 class NewsController {
     private $model;
 
+    // Lê Minh Đức
     public function __construct($db) {
         $this->model = new NewsModel($db);
     }

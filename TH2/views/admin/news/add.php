@@ -1,3 +1,4 @@
+<!-- Lê Minh Đức -->
 <?php
 require_once "../../../config/Database.php";
 require_once "../../../controllers/NewsController.php";
@@ -33,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-
+<!-- Đào Minh Đức -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <form method="POST" action="" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
 
