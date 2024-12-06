@@ -35,7 +35,11 @@ class NewsModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    
+    public function addNews($title, $content, $image, $category_id) {
+        $stmt = $this->conn->prepare("INSERT INTO news (title, content, image, created_at, category_id) 
+                                      VALUES (?, ?, ?, NOW(), ?)");
+        return $stmt->execute([$title, $content, $image, $category_id]);
+    }
 
 
 
