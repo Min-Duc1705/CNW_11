@@ -1,131 +1,45 @@
 <?php
-require_once '../Config/UserDB.php';
+require_once __DIR__ . '/../Config/Database.php';
+session_start();
 
 class UserModel {
     private $conn;
-
-    // Constructor để kết nối cơ sở dữ liệu
     public function __construct() {
-        $db = new UserDB(); // Tạo đối tượng UserDB
-        $this->conn = $db->getConnection(); // Lấy kết nối PDO
+        $db = new Database();
+        $this->conn = $db->connect();
     }
 
-    // Thêm người dùng mới
-    public function addUser($username, $password, $email, $role = 'user') {
-        try {
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT); // Mã hóa mật khẩu
-            $sql = "INSERT INTO users (username, password, email, role, created_at) VALUES (:username, :password, :email, :role, NOW())";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':password', $hashedPassword);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':role', $role);
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-    // Lấy danh sách tất cả người dùng
-    public function getAllUsers() {
-        try {
-            $sql = "SELECT id, username, email, role, created_at FROM users";
-            $stmt = $this->conn->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            return [];
-        }
-    }
-
-    // Lấy thông tin người dùng theo ID
-    public function getUserById($id) {
-        try {
-            $sql = "SELECT id, username, email, role, created_at FROM users WHERE id = :id";
-            $stmt = $this->conn->prepare($sql); 
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            return null;
-        }
-    }
-
-    // Cập nhật thông tin người dùng
-    public function updateUser($id, $username, $email, $role) {
-        try {
-            $sql = "UPDATE users SET username = :username, email = :email, role = :role, updated_at = NOW() WHERE id = :id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':role', $role);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-    // Xóa người dùng
-    public function deleteUser($id) {
-        try {
-            $sql = "DELETE FROM users WHERE id = :id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-    // Xác thực người dùng (login)
-    public function authenticateUser($username, $password) {
-        try {
-            $sql = "SELECT * FROM users WHERE username = :username";
-            $stmt = $this->conn->prepare($sql);
+    public function login($username, $password) {
+        /*try {
+            $stmt = $this->conn->prepare("SELECT id, username, password FROM users WHERE username = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($result && password_verify($password, $result['password'])) {
-                return $result; // Trả về thông tin người dùng
-            }
-            return false; // Sai username hoặc password
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-    // Đăng nhập và xử lý chuyển hướng
-    public function loginAndRedirect($username, $password) {
-        session_start(); // Bắt đầu session
-        if (!empty($username) && !empty($password)) {
-            $user = $this->authenticateUser($username, $password);
-    
-            if ($user) {
-                // Lưu thông tin người dùng vào session
+           $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($user && password_verify($password, $user['password']))  {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
-    
-                // Chuyển hướng đến trang dashboard
-                header("Location: dashboard.php");
-                exit();
-            } else {
-                // Sai username hoặc password
-                $_SESSION['error'] = 'Sai tên đăng nhập hoặc mật khẩu!';
-                header("Location: login.php");
-                exit();
+                return true;
             }
-        } else {
-            // Không nhập đủ thông tin
-            $_SESSION['error'] = 'Vui lòng nhập đầy đủ thông tin!';
-            header("Location: login.php");
-            exit();
-        }
-    }
+            return false;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }*/
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :username LIMIT 1");
+        $stmt->bindParam(":username", $username);
+        $stmt->execute();
 
-    // Đóng kết nối
-    public function closeConnection() {
+        if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($password === $row['password']) { // Sử dụng password_hash() và password_verify() trong sản xuất
+                return $row;
+            }
+        }
+        return false;
+    }
+  /*  public function closeConnection() {
         $this->conn = null;
     }
+        */
 }
 ?>
