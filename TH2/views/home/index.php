@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="../../public/css/style.css">
 <title>Trang Chủ</title>
 </head>
 
@@ -40,7 +41,7 @@
 
     <div class="container-fluid bg-primary py-2">
         <ul class="nav justify-content-evenly list-unstyled d-flex">
-            <li class="nav-item"><a href="#" class="nav-link text-white"><i class="fa-solid fa-house"></i></a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-white">Trang chủ</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-white">Thời sự</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-white">Khoa Học</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-white">Thế Giới</a></li>
@@ -48,7 +49,7 @@
             <li class="nav-item"><a href="#" class="nav-link text-white">Giải Trí</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-white">Pháp Luật</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-white">Giáo Dục</a></li>
-       
+ 
         </ul>
     </div>
 
