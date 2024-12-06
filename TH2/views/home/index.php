@@ -33,7 +33,7 @@
 
         <!-- Nút đăng nhập-->
         <nav class="auth-buttons">
-            <form action="views/admin/login.php" method="GET">
+            <form action="/CNW_11/TH2/views/admin/login.php"method="GET">
                     <button type="submit" class="btn btn-success">Đăng Nhập</button>
             </form>
         </nav>
