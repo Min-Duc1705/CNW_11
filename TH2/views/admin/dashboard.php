@@ -78,6 +78,11 @@ $newsList = $controller->listNews();
                 </div>
             </nav>
             <main class="content px-3 py-4">
+            <nav class="auth-buttons">
+                <form action="views/home/index.php"method="GET">
+                        <button type="submit" class="btn btn-success">Đăng Xuất</button>
+                </form>
+        </nav>
                 <div class="container-fluid">
                     <h3 class="fw-bold fs-4 mb-3 d-flex justify-content-between align-items-center">
                         <span>Admin Dashboard</span>

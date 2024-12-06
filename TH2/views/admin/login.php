@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -5,9 +6,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if ($username == "Admin" && $password == "Admin123") {
+    if ($username == "admin" && $password == "123456") {
         $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
+        header("Location: /admin/dashboard.php");
         exit();
     } else {
         echo "Đăng nhập không thành công!";
@@ -54,11 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      <p>We are happy to have you back.</p>
                 </div>
                 <div class="input-group mb-3">
-    <form method="POST" action="../../controllers/login_process.php">
-        <input type="text" name="username" class="form-control form-control-lg bg-light fs-6" placeholder="Username" required>
-        <input type="password" name="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" required>
-        <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 mt-3">Login</button>
-    </form>
+                    <form method="POST" action="/CNW_11/TH2/controllers/login_process.php">
+                        <input type="text" name="username" class="form-control form-control-lg bg-light fs-6" placeholder="Username" required>
+                        <input type="password" name="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" required>   
+                            <button type="submit" class="btn btn-lg btn-primary w-100 fs-6 mt-3">Login</button>
+                    </form>
 </div>
 <div class="input-group mb-5 d-flex justify-content-between">
                     <div class="form-check">
